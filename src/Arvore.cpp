@@ -20,11 +20,11 @@ int Arvore::getCoberturaMinimaDeVilas(){
         vilasSelecionadas[i] = 0;
     }
 
-    this->encontraCoberturaMinimaPorDfs(this->raiz, NULL, vilasCobertas, vilasSelecionadas);
+    this->encontraCoberturaMinimaPorDfs(this->raiz, vilasCobertas, vilasSelecionadas);
     return this->coberturaMinimaDeVilas;
 }
 
-void Arvore::encontraCoberturaMinimaPorDfs(Vila* vila, Vila* vilaMae, int* vilasCobertas, int* vilasSelecionadas)
+void Arvore::encontraCoberturaMinimaPorDfs(Vila* vila, int* vilasCobertas, int* vilasSelecionadas)
 {
     vilasCobertas[vila->getId()] = 1;
     int numeroVizinhas = vila->getNumeroVizinhas();
@@ -35,7 +35,7 @@ void Arvore::encontraCoberturaMinimaPorDfs(Vila* vila, Vila* vilaMae, int* vilas
     for (int i = 0; i < numeroVizinhas; i++)
     {
         if(!vilasCobertas[listaVizinhas[i]->getId()]){
-            this->encontraCoberturaMinimaPorDfs(listaVizinhas[i], vila, vilasCobertas, vilasSelecionadas);
+            this->encontraCoberturaMinimaPorDfs(listaVizinhas[i], vilasCobertas, vilasSelecionadas);
             if(!vilasSelecionadas[listaVizinhas[i]->getId()] && !vilasSelecionadas[vila->getId()]){
                 coberturaMinimaDeVilas++;
                 vilasSelecionadas[vila->getId()] = 1;

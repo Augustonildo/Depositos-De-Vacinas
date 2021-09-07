@@ -12,5 +12,5 @@ private:
     Vila* raiz;
     int coberturaMinimaDeVilas; 
     int numeroVilas;
-    void encontraCoberturaMinimaPorDfs(Vila* vila, Vila* vilaMae, int* vilasCobertas, int* vilasSelecionadas);
+    void encontraCoberturaMinimaPorDfs(Vila* vila, int* vilasCobertas, int* vilasSelecionadas);
 };
