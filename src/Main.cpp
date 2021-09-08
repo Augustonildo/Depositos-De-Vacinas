@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "Arvore.hpp"
 using namespace std;
@@ -10,11 +11,18 @@ void desalocaEspacoListaVilas(Vila** listaVilas, int numeroVilas){
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    // TODO: implementar leitura tipoTarefa
-    // string tipoTarefa;
-    // cin >> tipoTarefa;
+    if (argc < 3)
+    {
+        cout << "Os parametros necessarios para a execução não foram informados. Tente novamente." << endl;
+        return -1;
+    }
+
+    string tipoTarefa = argv[1];
+    ifstream arquivoEntrada(argv[2]);
+    streambuf *cinbuf = cin.rdbuf(arquivoEntrada.rdbuf()); //Alterando buffer de leitura para o arquivo de entrada
+
     int numeroVilas, numeroCaminhos;
     cin >> numeroVilas >> numeroCaminhos;
 
@@ -35,6 +43,7 @@ int main()
     Arvore arvore = Arvore(listaVilas[0], numeroVilas);
     cout << arvore.getCoberturaMinimaDeVilas() << endl;
 
+    cin.rdbuf(cinbuf); //Reinicializando o buffer de leitura
     desalocaEspacoListaVilas(listaVilas, numeroVilas);
     return 0;
 }
